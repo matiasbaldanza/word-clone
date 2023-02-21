@@ -1,6 +1,6 @@
 import React from "react";
 
-function GuessInput({handleInput}) {
+function GuessInput({ handleInput, disabled=false }) {
   const [guess, setGuess] = React.useState('');
 
     return (
@@ -21,10 +21,13 @@ function GuessInput({handleInput}) {
         maxLength={5}
         pattern="[a-zA-Z]{5}"
         title="Only 5 letters"
+        disabled={disabled}
+        autoComplete="off"
         onChange={(event) => {
           const nextGuess = event.target.value.toUpperCase()
           setGuess(nextGuess)
-        }}
+        }
+      }
       />
     </form>
   );

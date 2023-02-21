@@ -1,4 +1,5 @@
 export function checkGuess(guess, answer) {
+  
   if (!guess) {
     return null;
   }
