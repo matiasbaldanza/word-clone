@@ -1,0 +1,23 @@
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .kbd-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  
+  .kbd-key {
+    border: 1px solid var(--color-gray-700);
+    border-radius: 4px;
+    padding: 6px 10px;
+    overflow: hidden;
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--color-gray-100);
+    background-color: inherit;
+    min-width: 2.5rem;
+  }

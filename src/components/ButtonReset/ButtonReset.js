@@ -2,7 +2,7 @@ import React from "react";
 
 function ButtonReset({ action }) {
   return <button 
-          className="button"
+          className="btn"
           onClick={() => action()}
         >Reset Game</button>;
 }

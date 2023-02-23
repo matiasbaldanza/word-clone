@@ -23,6 +23,7 @@ function GuessInput({ handleInput, disabled=false }) {
         title="Only 5 letters"
         disabled={disabled}
         autoComplete="off"
+        autoFocus
         onChange={(event) => {
           const nextGuess = event.target.value.toUpperCase()
           setGuess(nextGuess)

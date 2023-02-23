@@ -2,10 +2,11 @@ import React from 'react';
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import GuessInput from '../GuessInput/GuessInput';
 import GuessResults from '../GuessResults/GuessResults';
 import Banner from '../Banner/Banner'
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import Keyboard from '../Keyboard/Keyboard'
 
 function Game() {
   const [guesses, setGuesses] = React.useState([])
@@ -46,7 +47,8 @@ function Game() {
               action={resetGame}
             /> 
       <GuessResults list={guesses} answer={answer}/>
-      <GuessInput handleInput={handleInput} disabled={Boolean(gameState)}/>
+      {<GuessInput handleInput={handleInput} disabled={Boolean(gameState)}/>}
+      <Keyboard handleInput={handleInput} answer={answer} guesses={guesses}/>
     </>
   )
 }
