@@ -7,11 +7,14 @@ import GuessInput from '../GuessInput/GuessInput';
 import GuessResults from '../GuessResults/GuessResults';
 import Banner from '../Banner/Banner'
 import Keyboard from '../Keyboard/Keyboard'
+import { checkGuess } from '../../game-helpers';
 
 function Game() {
-  const [guesses, setGuesses] = React.useState([])
-  const [gameState, setGameState] = React.useState('')
   const [answer, setAnswer] = React.useState(() => sample(WORDS))
+  const [gameState, setGameState] = React.useState('')
+  
+  const [guesses, setGuesses] = React.useState([])
+  const [lettersGuessed, setLettersGuessed] = React.useState(new Map([]))
 
   // To make debugging easier, we'll log the solution in the console
   console.info({ answer });
@@ -19,7 +22,16 @@ function Game() {
   function handleInput(input) {
     const newGuess = input
     const numOfGuesses = guesses.length + 1
+
     setGuesses([...guesses, newGuess])
+    
+    setLettersGuessed(checkGuess(input, answer)
+                        .reduce((accum, {letter, status}) => {
+                            return accum.get(letter) === 'correct'
+                                    ? accum
+                                    : accum.set(letter, status) 
+                            }, new Map([...lettersGuessed])))
+
     checkGameEndCondition(newGuess, numOfGuesses)
   }
 
@@ -34,6 +46,7 @@ function Game() {
   function resetGame() {
     setGuesses([])
     setGameState('')
+    setLettersGuessed(new Map([]))
     setAnswer(sample(WORDS))
   }
   
@@ -48,7 +61,7 @@ function Game() {
             /> 
       <GuessResults list={guesses} answer={answer}/>
       {<GuessInput handleInput={handleInput} disabled={Boolean(gameState)}/>}
-      <Keyboard handleInput={handleInput} answer={answer} guesses={guesses}/>
+      <Keyboard handleInput={handleInput} lettersGuessed={lettersGuessed} guesses={guesses}/>
     </>
   )
 }
