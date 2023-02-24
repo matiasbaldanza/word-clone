@@ -1,6 +1,6 @@
 import React from "react";
 
-function GuessInput({ handleInput, disabled=false }) {
+const GuessInput = React.forwardRef(({ handleInput, disabled=false }, inputRef) => {
   const [guess, setGuess] = React.useState('');
 
     return (
@@ -15,6 +15,7 @@ function GuessInput({ handleInput, disabled=false }) {
     >
       <label htmlFor="guess-input">Enter guess:</label>
       <input 
+        ref={inputRef}
         id="guess-input" 
         type="text" 
         value={guess}
@@ -32,6 +33,6 @@ function GuessInput({ handleInput, disabled=false }) {
       />
     </form>
   );
-}
+})
 
 export default GuessInput;
