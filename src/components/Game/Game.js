@@ -16,6 +16,15 @@ function Game() {
   const [guesses, setGuesses] = React.useState([])
   const [lettersGuessed, setLettersGuessed] = React.useState(new Map([]))
 
+  // With help from a friend (@goncy), I added a ref and a side effect
+  // to ensure the input received focus after resetting the game
+  // (It got focus but lost it, probably due to some other component)
+  // 
+  // This is used in resetGame()
+  // and it could have been done without useEffect by adding
+  //        setTimeOut(() => inputRef.current.focus(), 0)
+  // at the end of resetGame to ensure it executes 
+  // at the end of the loop
   const inputRef = React.useRef(null)
 
   // To make debugging easier, we'll log the solution in the console
